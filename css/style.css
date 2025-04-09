@@ -1,0 +1,332 @@
+/* js/style.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"); /* Import Poppins font */
+
+body {
+  /* font-family: 'Poppins', sans-serif; */ /* Applied Poppins */
+  /* background-color: #f8f9fa; */ /* Keep light background */
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* --- Sidebar Styles --- */
+.sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  background: #2c3e50; /* Slightly changed dark blue/grey */
+  color: #ecf0f1; /* Lighter text color */
+  transition: all 0.3s ease-in-out; /* Smoother transition */
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 999;
+  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.sidebar.toggled {
+  margin-left: -250px;
+}
+
+.sidebar .sidebar-header {
+  padding: 18px 20px; /* Adjusted padding */
+  background: #1f2b38; /* Darker header */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #3a506b; /* Subtle border */
+}
+
+.sidebar .sidebar-header h3 {
+  color: #fff;
+  margin-bottom: 0;
+  font-size: 1.4rem; /* Slightly smaller */
+  font-weight: 600;
+}
+
+.sidebar .sidebar-header #close-sidebar-btn {
+  color: #bdc3c7; /* Muted close icon color */
+  cursor: pointer;
+  font-size: 1.4rem;
+  transition: color 0.2s;
+}
+.sidebar .sidebar-header #close-sidebar-btn:hover {
+  color: #fff;
+}
+
+.sidebar ul.components {
+  padding: 15px 0; /* Adjusted padding */
+  border-bottom: none; /* Remove border between sections for cleaner look */
+}
+
+.sidebar ul li a {
+  padding: 12px 25px; /* Adjusted padding for better spacing */
+  font-size: 1.05em; /* Slightly adjusted font size */
+  display: block;
+  color: #bdc3c7; /* Muted link color */
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  font-weight: 400;
+  border-left: 3px solid transparent; /* For active indicator */
+}
+.sidebar ul li a i {
+  margin-right: 12px; /* Increased icon spacing */
+  width: 20px; /* Ensure icons align */
+  text-align: center;
+}
+
+.sidebar ul li a:hover {
+  color: #ffffff;
+  background: #3a506b; /* Slightly lighter hover background */
+  border-left-color: #ecf0f1; /* Indicate hover */
+}
+
+.sidebar ul li.active > a,
+a[aria-expanded="true"] {
+  color: #fff;
+  background: #3498db; /* Brighter blue for active */
+  border-left-color: #f1c40f; /* Yellow active indicator */
+  font-weight: 500;
+}
+
+/* --- Content Styles --- */
+#content {
+  width: 100%;
+  min-height: 100vh;
+  transition: all 0.3s ease-in-out; /* Match sidebar transition */
+  padding-left: 250px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f7f6; /* Very light grey for content background */
+}
+
+#content.sidebar-toggled {
+  padding-left: 0;
+  width: 100%;
+}
+
+/* Top Navbar Styles */
+#content .navbar {
+  padding: 12px 20px; /* Adjusted padding */
+  background: #ffffff; /* White navbar */
+  border: none;
+  border-radius: 0;
+  margin-bottom: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Softer shadow */
+  z-index: 998; /* Below sidebar */
+}
+#content .navbar .navbar-brand {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+#sidebar-toggle-btn {
+  color: #34495e;
+  border-color: #bdc3c7;
+}
+#sidebar-toggle-btn:hover {
+  background-color: #ecf0f1;
+}
+
+/* Main Content Area */
+#content main {
+  padding: 25px 30px; /* Increased padding */
+  flex-grow: 1; /* Ensure main takes available space */
+}
+
+/* --- Enhanced Design Elements --- */
+.card {
+  border: 1px solid #e0e0e0; /* Subtle border */
+  border-radius: 6px; /* Slightly more rounded corners */
+  margin-bottom: 1.5rem; /* Consistent card spacing */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); /* Subtle shadow */
+  transition: box-shadow 0.3s ease;
+}
+.card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Enhance shadow on hover */
+}
+
+.card-header {
+  /* Optional: Style card headers if you use them */
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 600;
+}
+.card-title {
+  font-weight: 600;
+  color: #34495e; /* Darker title color */
+  margin-bottom: 1.25rem; /* Space below title */
+}
+
+.shadow-lg {
+  /* Keep bootstrap shadow but maybe less intense */
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+}
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.06) !important;
+}
+
+.table {
+  border: 1px solid #dee2e6;
+  border-radius: 5px; /* Rounded table corners */
+  overflow: hidden; /* Ensure radius clips content */
+}
+
+.table thead th {
+  background-color: #e9ecef;
+  border-bottom-width: 2px; /* Slightly thicker bottom border */
+  font-weight: 600; /* Bolder headers */
+  color: #495057;
+  font-size: 0.95em;
+  white-space: nowrap; /* Prevent headers wrapping too easily */
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease; /* Smooth hover */
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f3f5; /* Slightly darker hover */
+}
+.table td,
+.table th {
+  vertical-align: middle; /* Align cell content vertically */
+}
+
+.btn {
+  border-radius: 4px; /* Consistent button radius */
+  padding: 0.4rem 0.9rem; /* Adjust padding */
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.btn-primary {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+.btn-primary:hover {
+  background-color: #2980b9;
+  border-color: #2980b9;
+  opacity: 0.9;
+}
+.btn-success {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+}
+.btn-success:hover {
+  background-color: #27ae60;
+  border-color: #27ae60;
+  opacity: 0.9;
+}
+.btn-danger {
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+}
+.btn-danger:hover {
+  background-color: #c0392b;
+  border-color: #c0392b;
+  opacity: 0.9;
+}
+.btn-warning {
+  background-color: #f39c12;
+  border-color: #f39c12;
+  color: #fff;
+}
+.btn-warning:hover {
+  background-color: #e67e22;
+  border-color: #e67e22;
+  color: #fff;
+  opacity: 0.9;
+}
+.btn-sm {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8em;
+}
+
+.form-control,
+.form-select {
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-check-input:checked {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+/* Footer */
+footer {
+  background-color: #e9ecef; /* Lighter footer */
+  /* padding: 15px 0; */
+  margin-top: auto; /* Pushes footer down */
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+/* --- Responsiveness --- */
+/* Keep existing media queries, they should work fine with Bootstrap */
+@media (max-width: 768px) {
+  .sidebar {
+    margin-left: -250px;
+  }
+  .sidebar.toggled {
+    margin-left: 0;
+  }
+  #content {
+    padding-left: 0;
+  }
+  #content.sidebar-toggled {
+    padding-left: 0;
+  }
+  #close-sidebar-btn {
+    display: block;
+  }
+  #sidebar-toggle-btn {
+    display: block;
+  }
+  /* Adjust content padding on small screens */
+  #content main {
+    padding: 15px;
+  }
+  .navbar {
+    padding: 10px 15px;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar {
+    margin-left: 0;
+  }
+  .sidebar.toggled {
+    margin-left: -250px;
+  }
+  #content {
+    padding-left: 250px;
+  }
+  #content.sidebar-toggled {
+    padding-left: 0;
+  }
+  #close-sidebar-btn {
+    display: none;
+  }
+}
+
+/* Utility (keep existing) */
+.d-flex {
+  display: flex !important;
+}
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+.gap-3 {
+  gap: 1rem !important;
+}
+.mt-auto {
+  margin-top: auto !important;
+}

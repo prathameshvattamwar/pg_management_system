@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PG Management System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap Icons (Optional, for better icons) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>PG Management</h3>
+            <i class="bi bi-x-lg" id="close-sidebar-btn"></i>
+        </div>
+        <ul class="list-unstyled components" id="sidebar-menu">
+            <!-- Sidebar links will be dynamically added here -->
+        </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content">
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+            <div class="container-fluid">
+                <button type="button" id="sidebar-toggle-btn" class="btn btn-outline-secondary">
+                    <i class="bi bi-list"></i> <!-- Hamburger Icon -->
+                </button>
+                <span class="navbar-brand mb-0 h1 ms-2">PG Management System</span>
+                 <!-- Logout button placeholder -->
+                 <button id="logout-btn" class="btn btn-outline-danger ms-auto d-none">Logout <i class="bi bi-box-arrow-right"></i></button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area - Sections will be shown/hidden -->
+        <main class="container-fluid p-3 p-md-4">
+
+            <!-- Login Section -->
+            <section id="login-section" class="container">
+                <div class="row justify-content-center mt-5">
+                    <div class="col-md-6 col-lg-5">
+                        <div class="card shadow-lg">
+                            <div class="card-body p-4 p-md-5">
+                                <h2 class="text-center mb-4">Login</h2>
+                                <form id="login-form">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" required>
+                                    </div>
+                                     <div class="mb-3">
+                                        <label for="role" class="form-label">Login As</label>
+                                        <select class="form-select" id="role" required>
+                                            <option value="admin">Admin</option>
+                                            <option value="tenant">Tenant</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                                    <div id="login-error" class="text-danger mt-2"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Admin Dashboard Section -->
+            <section id="admin-dashboard-section" class="d-none">
+                <h1 class="mb-4">Admin Dashboard</h1>
+
+                <!-- Admin Content Tabs -->
+                <ul class="nav nav-tabs mb-3" id="admin-tabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="add-room-tab" data-bs-toggle="tab" data-bs-target="#add-room-content" type="button" role="tab" aria-controls="add-room-content" aria-selected="true">Add Room</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="view-rooms-tab" data-bs-toggle="tab" data-bs-target="#view-rooms-content" type="button" role="tab" aria-controls="view-rooms-content" aria-selected="false">View Rooms</button>
+                  </li>
+                   <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="add-tenant-tab" data-bs-toggle="tab" data-bs-target="#add-tenant-content" type="button" role="tab" aria-controls="add-tenant-content" aria-selected="false">Add Tenant</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="view-tenants-tab" data-bs-toggle="tab" data-bs-target="#view-tenants-content" type="button" role="tab" aria-controls="view-tenants-content" aria-selected="false">View Tenants</button>
+                  </li>
+                   <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pending-payments-tab" data-bs-toggle="tab" data-bs-target="#pending-payments-content" type="button" role="tab" aria-controls="pending-payments-content" aria-selected="false">Pending Payments</button>
+                  </li>
+                </ul>
+
+                <!-- Admin Tab Content -->
+                <div class="tab-content" id="admin-tab-content">
+                  <!-- Add Room Content -->
+                  <div class="tab-pane fade show active" id="add-room-content" role="tabpanel" aria-labelledby="add-room-tab">
+                    <div class="card">
+                        <div class="card-body">
+                             <h3 class="card-title mb-3">Add New Room</h3>
+                             <form id="add-room-form">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="room-number" class="form-label">Room Number</label>
+                                        <input type="text" class="form-control" id="room-number" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                         <label for="room-type" class="form-label">Sharing Type</label>
+                                         <select class="form-select" id="room-type" required>
+                                             <option value="2">2 Partner</option>
+                                             <option value="3">3 Partner</option>
+                                         </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                         <label for="room-food" class="form-label">Food Included</label>
+                                         <select class="form-select" id="room-food" required>
+                                             <option value="yes">With Food</option>
+                                             <option value="no">Without Food</option>
+                                         </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <p><strong>Calculated Rent (per person):</strong> <span id="calculated-rent"> TBD</span> Rs.</p>
+                                    </div>
+                                     <div class="col-md-6">
+                                        <p><strong>Deposit (per person):</strong> 5000 Rs.</p>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Facilities Available</label>
+                                    <div id="facility-checkboxes" class="d-flex flex-wrap gap-3">
+                                        <!-- Checkboxes will be generated by JS -->
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                     <label for="room-rules" class="form-label">Room Rules (comma-separated)</label>
+                                     <textarea class="form-control" id="room-rules" rows="3" placeholder="e.g., No smoking, No drinking, Maintain silence after 11 PM" style="resize: none;"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Add Room</button>
+                                <div id="add-room-message" class="mt-2"></div>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+
+                  <!-- View Rooms Content -->
+                  <div class="tab-pane fade" id="view-rooms-content" role="tabpanel" aria-labelledby="view-rooms-tab">
+                     <h3 class="mb-3">Existing Rooms</h3>
+                     <div class="table-responsive">
+                         <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Room No</th>
+                                    <th>Type</th>
+                                    <th>Food</th>
+                                    <th>Rent (pp)</th>
+                                    <th>Deposit (pp)</th>
+                                    <th>Capacity</th>
+                                    <th>Occupancy</th>
+                                    <th>Facilities</th>
+                                    <th>Rules</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rooms-table-body">
+                                <!-- Room rows will be generated by JS -->
+                            </tbody>
+                        </table>
+                     </div>
+                  </div>
+
+                  <!-- Add Tenant Content -->
+                  <div class="tab-pane fade" id="add-tenant-content" role="tabpanel" aria-labelledby="add-tenant-tab">
+                    <div class="card">
+                        <div class="card-body">
+                             <h3 class="card-title mb-3">Add New Tenant</h3>
+                             <form id="add-tenant-form">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tenant-name" class="form-label">Tenant Name</label>
+                                        <input type="text" class="form-control" id="tenant-name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                         <label for="tenant-contact" class="form-label">Contact Number</label>
+                                         <input type="tel" class="form-control" id="tenant-contact" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                     <div class="col-md-6 mb-3">
+                                         <label for="tenant-room-number" class="form-label">Assign Room</label>
+                                         <select class="form-select" id="tenant-room-number" required>
+                                             <option value="">-- Select Room --</option>
+                                             <!-- Room options populated by JS -->
+                                         </select>
+                                    </div>
+                                     <div class="col-md-6 mb-3">
+                                         <label for="tenant-moving-date" class="form-label">Moving In Date</label>
+                                         <input type="date" class="form-control" id="tenant-moving-date" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="tenant-deposit-paid">
+                                          <label class="form-check-label" for="tenant-deposit-paid">
+                                            Deposit Paid?
+                                          </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                         <div class="form-check">
+                                          <input class="form-check-input" type="checkbox" value="" id="tenant-rent-paid">
+                                          <label class="form-check-label" for="tenant-rent-paid">
+                                            First Rent Paid?
+                                          </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                         <p class="mb-0"><em>(Username: contact number, Password: Name@RoomNo)</em></p>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Add Tenant</button>
+                                <div id="add-tenant-message" class="mt-2"></div>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+
+                  <!-- View Tenants Content -->
+                  <div class="tab-pane fade" id="view-tenants-content" role="tabpanel" aria-labelledby="view-tenants-tab">
+                     <h3 class="mb-3">Tenant Details</h3>
+                     <div class="table-responsive">
+                         <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Room No</th>
+                                    <th>Bed No</th>
+                                    <th>Move In</th>
+                                    <th>Rent (pp)</th>
+                                    <th>Deposit Paid</th>
+                                    <th>Current Rent Paid</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tenants-table-body">
+                                <!-- Tenant rows will be generated by JS -->
+                            </tbody>
+                        </table>
+                     </div>
+                  </div>
+
+                   <!-- Pending Payments Content -->
+                  <div class="tab-pane fade" id="pending-payments-content" role="tabpanel" aria-labelledby="pending-payments-tab">
+                     <h3 class="mb-3">Pending Payments</h3>
+                     <div class="table-responsive">
+                         <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Room No</th>
+                                    <th>Payment Due</th>
+                                    <th>Amount</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pending-payments-table-body">
+                                <!-- Pending payment rows will be generated by JS -->
+                            </tbody>
+                        </table>
+                     </div>
+                  </div>
+
+                </div>
+            </section>
+
+            <!-- Tenant Dashboard Section -->
+            <section id="tenant-dashboard-section" class="d-none">
+                 <h1 class="mb-4">Tenant Dashboard</h1>
+
+                <!-- Tenant Content Tabs -->
+                 <ul class="nav nav-tabs mb-3" id="tenant-tabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="my-details-tab" data-bs-toggle="tab" data-bs-target="#my-details-content" type="button" role="tab" aria-controls="my-details-content" aria-selected="true">My Details</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="my-room-tab" data-bs-toggle="tab" data-bs-target="#my-room-content" type="button" role="tab" aria-controls="my-room-content" aria-selected="false">My Room</button>
+                  </li>
+                   <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="complaints-tab" data-bs-toggle="tab" data-bs-target="#complaints-content" type="button" role="tab" aria-controls="complaints-content" aria-selected="false">Complaints</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="notices-tab" data-bs-toggle="tab" data-bs-target="#notices-content" type="button" role="tab" aria-controls="notices-content" aria-selected="false">Notices</button>
+                  </li>
+                </ul>
+
+                 <!-- Tenant Tab Content -->
+                 <div class="tab-content" id="tenant-tab-content">
+                    <!-- My Details -->
+                    <div class="tab-pane fade show active" id="my-details-content" role="tabpanel" aria-labelledby="my-details-tab">
+                         <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title mb-3">My Personal Information</h3>
+                                <div id="tenant-personal-info">
+                                    <!-- Tenant details loaded by JS -->
+                                    <p><strong>Name:</strong> <span id="tenant-info-name"></span></p>
+                                    <p><strong>Contact:</strong> <span id="tenant-info-contact"></span></p>
+                                    <p><strong>Moving In Date:</strong> <span id="tenant-info-movein"></span></p>
+                                    <p><strong>Deposit Status:</strong> <span id="tenant-info-deposit"></span></p>
+                                    <p><strong>Current Rent Status:</strong> <span id="tenant-info-rent"></span></p>
+                                    <p><strong>Rent Amount (Monthly):</strong> <span id="tenant-info-rent-amount"></span> Rs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- My Room -->
+                    <div class="tab-pane fade" id="my-room-content" role="tabpanel" aria-labelledby="my-room-tab">
+                        <div class="row">
+                            <div class="col-md-7 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title mb-3">My Room Details</h3>
+                                        <div id="tenant-room-details">
+                                            <!-- Room details loaded by JS -->
+                                            <p><strong>Room Number:</strong> <span id="tenant-room-info-number"></span></p>
+                                            <p><strong>Sharing Type:</strong> <span id="tenant-room-info-type"></span></p>
+                                            <p><strong>Food Included:</strong> <span id="tenant-room-info-food"></span></p>
+                                            <p><strong>My Bed Number:</strong> <span id="tenant-room-info-bed"></span></p>
+                                            <p><strong>Facilities:</strong> <span id="tenant-room-info-facilities"></span></p>
+                                            <p><strong>Rules:</strong> <span id="tenant-room-info-rules"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 mb-3">
+                                 <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title mb-3">Room Occupancy</h3>
+                                        <div id="tenant-room-occupancy">
+                                             <!-- Room occupancy loaded by JS -->
+                                             <p><strong>Total Beds:</strong> <span id="occupancy-total"></span></p>
+                                             <p><strong>Occupied Beds:</strong> <span id="occupancy-occupied"></span></p>
+                                             <p><strong>Available Beds:</strong> <span id="occupancy-available"></span></p>
+                                             <h5 class="mt-3">Room Partners</h5>
+                                             <ul id="room-partners-list" class="list-group list-group-flush">
+                                                 <!-- Partner list (Bed No: Name) loaded by JS -->
+                                             </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Complaints -->
+                    <div class="tab-pane fade" id="complaints-content" role="tabpanel" aria-labelledby="complaints-tab">
+                         <div class="card mb-3">
+                             <div class="card-body">
+                                 <h3 class="card-title mb-3">Raise a Complaint/Request</h3>
+                                 <form id="add-complaint-form">
+                                     <div class="mb-3">
+                                         <label for="complaint-type" class="form-label">Type</label>
+                                         <select id="complaint-type" class="form-select" required>
+                                             <option value="">-- Select Type --</option>
+                                             <option value="Maintenance">Maintenance</option>
+                                             <option value="Cleaning">Cleaning</option>
+                                             <option value="Wifi">Wifi Issue</option>
+                                             <option value="Water">Water Issue</option>
+                                             <option value="Electricity">Electricity Issue</option>
+                                             <option value="Other">Other</option>
+                                         </select>
+                                     </div>
+                                     <div class="mb-3">
+                                         <label for="complaint-details" class="form-label">Details</label>
+                                         <textarea id="complaint-details" class="form-control" rows="3" required></textarea>
+                                     </div>
+                                     <button type="submit" class="btn btn-warning">Submit Complaint</button>
+                                     <div id="add-complaint-message" class="mt-2"></div>
+                                 </form>
+                             </div>
+                         </div>
+                         <div class="card">
+                             <div class="card-body">
+                                 <h3 class="card-title mb-3">My Past Complaints</h3>
+                                 <ul id="complaints-list" class="list-group list-group-flush">
+                                     <!-- Complaints loaded by JS -->
+                                     <li class="list-group-item">No complaints found.</li>
+                                 </ul>
+                             </div>
+                         </div>
+                    </div>
+                     <!-- Notices -->
+                    <div class="tab-pane fade" id="notices-content" role="tabpanel" aria-labelledby="notices-tab">
+                         <div class="card">
+                             <div class="card-body">
+                                 <h3 class="card-title mb-3">Notice Board</h3>
+                                 <div id="notices-list">
+                                     <!-- Notices loaded by JS -->
+                                      <p>No notices available.</p>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
+                 </div>
+            </section>
+
+        </main>
+
+         <!-- Optional: Footer -->
+        <footer class="bg-light text-center text-lg-start mt-auto">
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+                © 2025 PG Management System
+            </div>
+        </footer>
+
+    </div> <!-- End #content -->
+
+    <!-- Bootstrap JS Bundle -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/tenant.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

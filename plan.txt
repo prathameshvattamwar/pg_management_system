@@ -1,0 +1,17 @@
+PG Management System
+----------------------------------
+implement full stack project using only html css js bootstrap and responsive across all devices has enhanced design next level feature sidebar open close system with hamburger/close icon, also have admin login user login admin dashboard user dashboard. Project name is "PG Management system"
+
+Admin dashboard has panel where he can add new room where there option as room is two partner or three partner then with food or without food. If room is two partner /three partner with food then rent will be 7000 each person if 2/3 partner room without food then rent will be 3500 Rs. per person. Deposit is same 5000Rs per person per/per bed.
+
+while adding new room owner (admin) will write facility or select facilities like in the room available facilities like AC/Non-AC, Refrigerator, Cooler, Water heater, Wifi, Bed, Cupboard, 24hrs water for drinking, for use, study table, chair, etc.
+
+and then after listing or choosing these option will be able to room also admin (owner) can add rules for the room like No drinking, No smoking, Late night parties not allowed, etc.
+
+after that admin (owner) dashboard has table where they can see pending rent pending deposits of which person, etc.
+
+after that also have a section where owner can add new Tenants, using his/her name, contact number, room type, food/without, moving date, deposite paid/unpaid , rent paid/unpaid checkbox. Payment tracking system.
+
+All these details will be saved to localstorage.
+
+After that tenants side login he/she can see the all details uploaded by owner like room details his/her own room details, room partner bed number details, how many beds remaining in their room also add features for tenants side dashboard by   your own smartly
